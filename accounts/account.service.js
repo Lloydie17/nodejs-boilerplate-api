@@ -1,6 +1,6 @@
 const config = require('config.json');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt.js');
+const bcrypt = require('bcryptjs');
 const crypto = require("crypto");
 const { Op } = require('sequelize');
 const sendEmail = require('_helpers/send-email');

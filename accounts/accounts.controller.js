@@ -15,9 +15,9 @@ router.post('/verify-email', verifyEmailSchema, verifyEmail);
 router.post('/forgot-password', forgotPasswordSchema, forgotPassword); 
 router.post('/validate-reset-token', validateResetTokenSchema, validateResetToken); 
 router.post('/reset-password', resetPasswordSchema, resetPassword);
-router.get('/', authorize(Role. Admin), getAll);
+router.get('/', authorize(Role.Admin), getAll);
 router.get('/:id', authorize(), getById);
-router.post('/', authorize(Role. Admin), createSchema, create);
+router.post('/', authorize(Role.Admin), createSchema, create);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
 
@@ -122,7 +122,7 @@ function forgotPassword(req, res, next) {
         .catch(next);
 }
 
-function validateResetTokenSchema(req, rest, next) {
+function validateResetTokenSchema(req, res, next) {
     const schema = Joi.object({
         token: Joi.string().required()
     });
@@ -222,7 +222,7 @@ function _delete(req, res, next) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    accountService.update(req.params.id)
+    accountService.delete(req.params.id)
         .then(() => res.json({ message: 'Account deleted successfully' }))
         .catch(next);
 }
@@ -235,5 +235,5 @@ function setTokenCookie(res, token) {
         httpOnly: true,
         expires: new Date(Date.now() + 7*24*60*60*1000 )
     };
-    res.cookies('refreshToken', token, cookieOptions);
+    res.cookie('refreshToken', token, cookieOptions);
 }

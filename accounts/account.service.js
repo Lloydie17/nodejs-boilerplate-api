@@ -93,7 +93,7 @@ async function register(params, origin) {
     account.verificationToken = randomTokenString();
 
     //hash password
-    account.passwordhash = await hash(params.password);
+    account.passwordHash = await hash(params.password);
 
     // save account
     await account.save();

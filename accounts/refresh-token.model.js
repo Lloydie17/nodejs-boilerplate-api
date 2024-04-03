@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 module.exports = model;
 
 function model(sequelize) {
-    const attirbutes = {
+    const attributes = {
         token: { type: DataTypes.STRING },
         expires: { type: DataTypes.DATE },
         created: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
@@ -17,7 +17,7 @@ function model(sequelize) {
         },
         isActive: {
             type: DataTypes.VIRTUAL,
-            get() { return !this.revoked && !this.isExpired }
+            get() { return !this.revoked && !this.isExpired; }
         }
     };
 
@@ -26,5 +26,5 @@ function model(sequelize) {
         timestamps: false
     };
 
-    return sequelize.define('refreshToken', attirbutes, options);
+    return sequelize.define('refreshToken', attributes, options);
 }

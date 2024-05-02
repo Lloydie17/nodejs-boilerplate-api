@@ -32,7 +32,7 @@ async function authenticate({ email, password, ipAddress }) {
     }
 
     if(account.isActive == false) {
-        throw 'Account is deactivated';
+        throw 'Account is disabled';
     }
 
     // authentication successful so generate jwt and refresh tokens

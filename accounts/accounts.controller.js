@@ -199,7 +199,8 @@ function updateSchema(req, res, next) {
 
     // only admins can update role
     if (req.auth.role === Role.Admin) {
-        schemaRules.role = Joi.string().valid(Role.Admin, Role.User).empty('');
+        schemaRules.role = Joi.string().valid(Role.Admin, Role.User).empty(''),
+        schemaRules.isActive = Joi.string().empty('');
     }
 
     const schema = Joi.object(schemaRules).with('password', 'confirmPassword');
